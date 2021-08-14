@@ -1,41 +1,45 @@
 use tonic::{transport::Server, Request, Response, Status};
+use muscle_exercises::data_server::{Data, DataServer};
+use muscle_exercises::{DataReply, DataRequest};
+use tokio::sync::mpsc;
+use tokio_stream::wrappers::ReceiverStream;
+use api::api::get_data_async;
 
-use hello_world::greeter_server::{Greeter, GreeterServer};
-use hello_world::{HelloReply, HelloRequest};
-
-pub mod hello_world {
-    tonic::include_proto!("helloworld");
+pub mod muscle_exercises {
+    tonic::include_proto!("muscle_exercises");
 }
 
 #[derive(Default)]
-pub struct MyGreeter {}
+pub struct MyGrpc {}
 
 #[tonic::async_trait]
-impl Greeter for MyGreeter {
-    async fn say_hello(
-        &self,
-        request: Request<HelloRequest>,
-    ) -> Result<Response<HelloReply>, Status> {
-        println!("Got a request from {:?}", request.remote_addr());
+impl Data for MyGrpc {
+    type SendReplyStream = ReceiverStream<Result<DataReply, Status>>;
 
-        let reply = hello_world::HelloReply {
-            message: format!("Hello {}!", request.into_inner().name),
-        };
-        Ok(Response::new(reply))
+    async fn send_reply (
+        &self,
+        request: Request<DataRequest>,
+    ) -> Result<Response<Self::SendReplyStream>, Status> {
+        println!("Got a request from {:?} : {:?}", request.remote_addr(), request);
+        let (tx, rx) = mpsc::channel(4);
+        tokio::spawn(async move {
+            let data = muscle_exercises::DataReply {
+                message: get_data_async(String::from(request.into_inner().name).as_str()).await,
+            };
+            tx.send(Ok(data)).await.unwrap();
+        });
+        return Ok(Response::new(ReceiverStream::new(rx)));
     }
 }
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let addr = "[::1]:50051".parse().unwrap();
-    let greeter = MyGreeter::default();
-
-    println!("GreeterServer listening on {}", addr);
-
+    let address = api::api::grpc_server_url().parse().unwrap();
+    let my_grpc = MyGrpc::default();
+    println!("DataServer listening on {}", address);
     Server::builder()
-        .add_service(GreeterServer::new(greeter))
-        .serve(addr)
+        .add_service(DataServer::new(my_grpc))
+        .serve(address)
         .await?;
-
     Ok(())
 }
