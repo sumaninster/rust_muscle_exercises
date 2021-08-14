@@ -1,23 +1,34 @@
-# Rust REST API - Muscle and Exercises
+# Rust REST API & GRPC - Muscle and Exercises
 This API is built to demonstrate Rust REST API
 
-## How to run the go codes from the terminal
+## Project Setup
 
 1. Create a project directory and navigate to the folder from your terminal.
-2. git clone <project_git_url>
+2. git clone https://github.com/sumaninster/rust_muscle_exercises.git
 3. Update your database username and password in the config.rs file.
-4. Run $ cargo build
-5. Run $ cargo run
 
 ## How to import the db.sql file in your postgres database
 
 Run the following commands from your terminal-
 
-1. $ createdb -U postgres tonal
-2. $ psql -U postgres tonal < <project_path>/db.sql
+1. $ createdb -U postgres muscle_exercises
+2. $ psql -U postgres muscle_exercises < <project_path>/db/db.sql
 
+## How to run REST API from the terminal
 
-## URL to test
+1. Run $ cargo build
+2. Run $ cargo run --bin http-server
+
+## How to run grpc Server & Client from the terminal
+
+Run the commands in two different terminal
+
+1. Run $ cargo build
+2. Run $ cargo run --bin grpc-server
+3. Run $ cargo run --bin grpc-client
+4. Select an option from client terminal to receive data from grpc server
+
+## REST API: URL to test
 
 Open following url from browser-
 

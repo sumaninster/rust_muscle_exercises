@@ -13,7 +13,7 @@ pub mod api {
     use crate::psql::psql_async;
 
     pub fn api() {
-        config::help();
+        config::api_help();
         let n_workers = 4;
         let pool = ThreadPool::new(n_workers);
         let listener = TcpListener::bind(config::http_server_url()).unwrap();
@@ -23,27 +23,6 @@ pub mod api {
                 handle_connection(stream);
             });
         }
-    }
-
-    fn file_contents(filename: &str) -> String {
-        return fs::read_to_string(format!("{}", filename)).unwrap();
-    }
-
-    fn get_data(link: &str) -> String {
-        let db = Db{};
-        return db.get_data(link);
-    }
-
-    pub async fn get_data_async(link: &str) -> String {
-        return psql_async::get_data(link).await;
-    }
-
-    pub fn grpc_server_url() -> String {
-        return config::grpc_server_url();
-    }
-
-    pub fn grpc_client_url() -> String {
-        return config::grpc_client_url();
     }
 
     fn handle_connection(mut stream: TcpStream) {
@@ -80,5 +59,30 @@ pub mod api {
         );
         stream.write(response.as_bytes()).unwrap();
         stream.flush().unwrap();
+    }
+
+    fn file_contents(filename: &str) -> String {
+        return fs::read_to_string(format!("{}", filename)).unwrap();
+    }
+
+    fn get_data(link: &str) -> String {
+        let db = Db{};
+        return db.get_data(link);
+    }
+
+    pub async fn get_data_async(link: &str) -> String {
+        return psql_async::get_data(link).await;
+    }
+
+    pub fn grpc_server_url() -> String {
+        return config::grpc_server_url();
+    }
+
+    pub fn grpc_client_url() -> String {
+        return config::grpc_client_url();
+    }
+
+    pub fn grpc_client_help() {
+        config::grpc_client_help();
     }
 }
