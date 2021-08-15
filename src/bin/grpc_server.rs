@@ -23,8 +23,9 @@ impl Data for MyGrpc {
         println!("Got a request from {:?} : {:?}", request.remote_addr(), request);
         let (tx, rx) = mpsc::channel(4);
         tokio::spawn(async move {
+            let DataRequest { id, name } = request.into_inner();
             let data = muscle_exercises::DataReply {
-                message: get_data_async(String::from(request.into_inner().name).as_str()).await,
+                message: get_data_async(String::from(&name).as_str(), &id).await,
             };
             tx.send(Ok(data)).await.unwrap();
         });

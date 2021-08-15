@@ -50,12 +50,12 @@ pub mod psql {
             Ok(result)
         }
 
-        pub fn get_data(&self, link: &str) -> String {
+        pub fn get_data(&self, link: &str, id: &i64) -> String {
             let result = match link {
                 "muscle_groups" => self.get_muscle_groups(),
                 "exercises" => self.get_exercises(),
-                "exercises_for_muscle_group" => self.get_exercises_for_muscle_group(&1),
-                "muscle_groups_for_exercise" => self.get_muscle_groups_for_exercise(&1),
+                "exercises_for_muscle_group" => self.get_exercises_for_muscle_group(id),
+                "muscle_groups_for_exercise" => self.get_muscle_groups_for_exercise(id),
                 _ => Ok("".to_string())
             };
             let data = match result {
@@ -122,12 +122,12 @@ pub mod psql_async {
         Ok(result)
     }
 
-    pub async fn get_data(link: &str) -> String {
+    pub async fn get_data(link: &str, id: &i64) -> String {
         let result = match link {
             "muscle_groups" => get_muscle_groups().await.unwrap(),
             "exercises" => get_exercises().await.unwrap(),
-            "exercises_for_muscle_group" => get_exercises_for_muscle_group(&1).await.unwrap(),
-            "muscle_groups_for_exercise" => get_muscle_groups_for_exercise(&1).await.unwrap(),
+            "exercises_for_muscle_group" => get_exercises_for_muscle_group(id).await.unwrap(),
+            "muscle_groups_for_exercise" => get_muscle_groups_for_exercise(id).await.unwrap(),
             _ => "".to_string(),
         };
         return result;

@@ -67,11 +67,11 @@ pub mod api {
 
     fn get_data(link: &str) -> String {
         let db = Db{};
-        return db.get_data(link);
+        return db.get_data(link, &1);
     }
 
-    pub async fn get_data_async(link: &str) -> String {
-        return psql_async::get_data(link).await;
+    pub async fn get_data_async(link: &str, id: &i64) -> String {
+        return psql_async::get_data(link, id).await;
     }
 
     pub fn grpc_server_url() -> String {
