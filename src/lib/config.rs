@@ -40,5 +40,6 @@ pub mod config {
         println!("2) Exercises");
         println!("3) Exercises for a Muscle Group with id 1");
         println!("4) Muscle Groups for an Exercise with id 1");
+        println!("5) Exit");
     }
 }

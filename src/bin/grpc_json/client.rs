@@ -24,6 +24,7 @@ async fn help() -> (String, i64) {
         2 => ("exercises".to_string(), 0_i64),
         3 => ("exercises_for_muscle_group".to_string(), get_id("Muscle Group")),
         4 => ("muscle_groups_for_exercise".to_string(), get_id("Exercise")),
+        5 => ("break".to_string(), 0_i64),
         _ => ("".to_string(), 0_i64),
     };
     return (option, id);
@@ -31,19 +32,22 @@ async fn help() -> (String, i64) {
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let mut client = DataClient::connect(api::api::grpc_client_url()).await?;
-    let (option, id) = help().await;
-    let request = tonic::Request::new(DataRequest {
-        name: option.into(),
-        id: id.into(),
-    });
-    let mut stream = client
-        .send_reply(request)
-        .await?
-        .into_inner();
+    loop {
+        let mut client = DataClient::connect(api::api::grpc_client_url()).await?;
+        let (option, id) = help().await;
+        if option == "break" {break}
+        let request = tonic::Request::new(DataRequest {
+            name: option.into(),
+            id: id.into(),
+        });
+        let mut stream = client
+            .send_reply(request)
+            .await?
+            .into_inner();
 
-    while let Some(feature) = stream.message().await? {
-        println!("RESPONSE = {:?}", feature);
+        while let Some(feature) = stream.message().await? {
+            println!("RESPONSE = {:?}", feature);
+        }
     }
     Ok(())
 }
