@@ -24,7 +24,7 @@ async fn help() -> (String, i64) {
         2 => ("exercises".to_string(), 0_i64),
         3 => ("exercises_for_muscle_group".to_string(), get_id("Muscle Group")),
         4 => ("muscle_groups_for_exercise".to_string(), get_id("Exercise")),
-        5 => ("break".to_string(), 0_i64),
+        5 => ("exit".to_string(), 0_i64),
         _ => ("".to_string(), 0_i64),
     };
     return (option, id);
@@ -35,7 +35,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     loop {
         let mut client = DataClient::connect(api::api::grpc_client_url()).await?;
         let (option, id) = help().await;
-        if option == "break" {break}
+        if option == "exit" {break}
         let request = tonic::Request::new(DataRequest {
             name: option.into(),
             id: id.into(),

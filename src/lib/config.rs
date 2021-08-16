@@ -38,8 +38,8 @@ pub mod config {
         println!("Select option number");
         println!("1) Muscle Groups");
         println!("2) Exercises");
-        println!("3) Exercises for a Muscle Group with id 1");
-        println!("4) Muscle Groups for an Exercise with id 1");
+        println!("3) Exercises for a Muscle Group with id");
+        println!("4) Muscle Groups for an Exercise with id");
         println!("5) Exit");
     }
 }
