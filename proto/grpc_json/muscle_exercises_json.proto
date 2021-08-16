@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package muscle_exercises;
+package muscle_exercises_json;
 
 service Data {
   rpc SendReply (DataRequest) returns (stream DataReply) {}

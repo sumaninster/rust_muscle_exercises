@@ -20,18 +20,28 @@ tonic-build = "0.5.2"
 
 [lib]
 name = "api"
-path = "src/api.rs"
+path = "src/lib/api.rs"
 
 [[bin]]
 name = "http-server"
-path = "src/bin/http_server.rs"
+path = "src/bin/http/server.rs"
 
 # server binary
 [[bin]]
 name = "grpc-server"
-path = "src/bin/grpc_server.rs"
+path = "src/bin/grpc_object/server.rs"
 
 # client binary
 [[bin]]
 name = "grpc-client"
-path = "src/bin/grpc_client.rs"
+path = "src/bin/grpc_object/client.rs"
+
+# server binary
+[[bin]]
+name = "grpc-json-server"
+path = "src/bin/grpc_json/server.rs"
+
+# client binary
+[[bin]]
+name = "grpc-json-client"
+path = "src/bin/grpc_json/client.rs"

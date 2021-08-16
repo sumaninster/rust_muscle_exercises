@@ -1,12 +1,12 @@
 use tonic::{transport::Server, Request, Response, Status};
-use muscle_exercises::data_server::{Data, DataServer};
-use muscle_exercises::{DataReply, DataRequest};
+use muscle_exercises_json::data_server::{Data, DataServer};
+use muscle_exercises_json::{DataReply, DataRequest};
 use tokio::sync::mpsc;
 use tokio_stream::wrappers::ReceiverStream;
 use api::api::get_data_async;
 
-pub mod muscle_exercises {
-    tonic::include_proto!("muscle_exercises");
+pub mod muscle_exercises_json {
+    tonic::include_proto!("muscle_exercises_json");
 }
 
 #[derive(Default)]
@@ -24,7 +24,7 @@ impl Data for MyGrpc {
         let (tx, rx) = mpsc::channel(4);
         tokio::spawn(async move {
             let DataRequest { id, name } = request.into_inner();
-            let data = muscle_exercises::DataReply {
+            let data = DataReply {
                 message: get_data_async(String::from(&name).as_str(), &id).await,
             };
             tx.send(Ok(data)).await.unwrap();

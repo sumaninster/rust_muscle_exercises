@@ -1,16 +1,16 @@
 mod psql;
 mod config;
+mod psql_async;
 
 pub mod api {
+    use std::fs;
     use std::io::prelude::*;
     use std::net::TcpListener;
     use std::net::TcpStream;
-    use std::{fs, thread};
-    use std::time::Duration;
     use threadpool::ThreadPool;
-    use crate::psql::psql::Db;
     use crate::config::config;
-    use crate::psql::psql_async;
+    use crate::psql::psql::Db;
+    use crate::psql_async::psql_async;
 
     pub fn api() {
         config::api_help();
@@ -28,17 +28,12 @@ pub mod api {
     fn handle_connection(mut stream: TcpStream) {
         let mut buffer = [0; 1024];
         stream.read(&mut buffer).unwrap();
-        //println!("Request: {}", String::from_utf8_lossy(&buffer[..]));
         let get = b"GET / HTTP/1.1\r\n";
-        let sleep = b"GET /sleep HTTP/1.1\r\n";
         let muscle_groups = b"GET /musclegroups HTTP/1.1\r\n";
         let exercises = b"GET /exercises HTTP/1.1\r\n";
         let exercises_for_muscle_group = b"GET /exercisesformusclegroup HTTP/1.1\r\n";
         let muscle_groups_for_exercise = b"GET /musclegroupsforexercise HTTP/1.1\r\n";
         let (status_line, contents) = if buffer.starts_with(get) {
-            ("HTTP/1.1 200 OK", file_contents("html/welcome.html"))
-        } else if buffer.starts_with(sleep) {
-            thread::sleep(Duration::from_secs(5));
             ("HTTP/1.1 200 OK", file_contents("html/welcome.html"))
         } else if buffer.starts_with(muscle_groups) {
             ("HTTP/1.1 200 OK", get_data("muscle_groups"))
@@ -84,5 +79,9 @@ pub mod api {
 
     pub fn grpc_client_help() {
         config::grpc_client_help();
+    }
+
+    pub fn db_url() -> String {
+        return config::db_url();
     }
 }

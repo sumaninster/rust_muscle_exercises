@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package muscle_exercises_object;
+
+service Data {
+  rpc AllMuscleGroups (DataEmpty) returns (stream MuscleGroups) {}
+  rpc AllExercises (DataEmpty) returns (stream Exercises) {}
+  rpc ExercisesForMuscleGroup (DataRequest) returns (stream Exercises) {}
+  rpc MuscleGroupsForExercise (DataRequest) returns (stream MuscleGroups) {}
+}
+
+message DataEmpty {}
+
+message DataRequest {
+  int64 id = 1;
+}
+
+message MuscleGroup {
+  int64 id = 1;
+  string name = 2;
+}
+
+message Exercise {
+  int64 id = 1;
+  string name = 2;
+}
+
+message MuscleGroups {
+  repeated MuscleGroup muscle_groups = 1;
+}
+
+message Exercises {
+  repeated Exercise exercises = 1;
+}

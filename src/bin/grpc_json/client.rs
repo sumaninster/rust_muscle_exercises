@@ -1,8 +1,8 @@
-use muscle_exercises::data_client::DataClient;
-use muscle_exercises::DataRequest;
+use muscle_exercises_json::data_client::DataClient;
+use muscle_exercises_json::DataRequest;
 
-pub mod muscle_exercises {
-    tonic::include_proto!("muscle_exercises");
+pub mod muscle_exercises_json {
+    tonic::include_proto!("muscle_exercises_json");
 }
 
 fn get_id(option: &str) -> i64 {
