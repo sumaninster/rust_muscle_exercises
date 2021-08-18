@@ -1,0 +1,16 @@
+/Users/suman/Projects/rust/practice/muscle_exercises/rust/target/debug/deps/prost_build-f4dbb5b3881039d9.rmeta: /Users/suman/.cargo/registry/src/github.com-1ecc6299db9ec823/prost-build-0.8.0/src/lib.rs /Users/suman/.cargo/registry/src/github.com-1ecc6299db9ec823/prost-build-0.8.0/src/ast.rs /Users/suman/.cargo/registry/src/github.com-1ecc6299db9ec823/prost-build-0.8.0/src/code_generator.rs /Users/suman/.cargo/registry/src/github.com-1ecc6299db9ec823/prost-build-0.8.0/src/extern_paths.rs /Users/suman/.cargo/registry/src/github.com-1ecc6299db9ec823/prost-build-0.8.0/src/ident.rs /Users/suman/.cargo/registry/src/github.com-1ecc6299db9ec823/prost-build-0.8.0/src/message_graph.rs /Users/suman/.cargo/registry/src/github.com-1ecc6299db9ec823/prost-build-0.8.0/src/path.rs
+
+/Users/suman/Projects/rust/practice/muscle_exercises/rust/target/debug/deps/libprost_build-f4dbb5b3881039d9.rlib: /Users/suman/.cargo/registry/src/github.com-1ecc6299db9ec823/prost-build-0.8.0/src/lib.rs /Users/suman/.cargo/registry/src/github.com-1ecc6299db9ec823/prost-build-0.8.0/src/ast.rs /Users/suman/.cargo/registry/src/github.com-1ecc6299db9ec823/prost-build-0.8.0/src/code_generator.rs /Users/suman/.cargo/registry/src/github.com-1ecc6299db9ec823/prost-build-0.8.0/src/extern_paths.rs /Users/suman/.cargo/registry/src/github.com-1ecc6299db9ec823/prost-build-0.8.0/src/ident.rs /Users/suman/.cargo/registry/src/github.com-1ecc6299db9ec823/prost-build-0.8.0/src/message_graph.rs /Users/suman/.cargo/registry/src/github.com-1ecc6299db9ec823/prost-build-0.8.0/src/path.rs
+
+/Users/suman/Projects/rust/practice/muscle_exercises/rust/target/debug/deps/prost_build-f4dbb5b3881039d9.d: /Users/suman/.cargo/registry/src/github.com-1ecc6299db9ec823/prost-build-0.8.0/src/lib.rs /Users/suman/.cargo/registry/src/github.com-1ecc6299db9ec823/prost-build-0.8.0/src/ast.rs /Users/suman/.cargo/registry/src/github.com-1ecc6299db9ec823/prost-build-0.8.0/src/code_generator.rs /Users/suman/.cargo/registry/src/github.com-1ecc6299db9ec823/prost-build-0.8.0/src/extern_paths.rs /Users/suman/.cargo/registry/src/github.com-1ecc6299db9ec823/prost-build-0.8.0/src/ident.rs /Users/suman/.cargo/registry/src/github.com-1ecc6299db9ec823/prost-build-0.8.0/src/message_graph.rs /Users/suman/.cargo/registry/src/github.com-1ecc6299db9ec823/prost-build-0.8.0/src/path.rs
+
+/Users/suman/.cargo/registry/src/github.com-1ecc6299db9ec823/prost-build-0.8.0/src/lib.rs:
+/Users/suman/.cargo/registry/src/github.com-1ecc6299db9ec823/prost-build-0.8.0/src/ast.rs:
+/Users/suman/.cargo/registry/src/github.com-1ecc6299db9ec823/prost-build-0.8.0/src/code_generator.rs:
+/Users/suman/.cargo/registry/src/github.com-1ecc6299db9ec823/prost-build-0.8.0/src/extern_paths.rs:
+/Users/suman/.cargo/registry/src/github.com-1ecc6299db9ec823/prost-build-0.8.0/src/ident.rs:
+/Users/suman/.cargo/registry/src/github.com-1ecc6299db9ec823/prost-build-0.8.0/src/message_graph.rs:
+/Users/suman/.cargo/registry/src/github.com-1ecc6299db9ec823/prost-build-0.8.0/src/path.rs:
+
+# env-dep:PROTOC=/Users/suman/.cargo/registry/src/github.com-1ecc6299db9ec823/prost-build-0.8.0/third-party/protobuf/protoc-osx-x86_64
+# env-dep:PROTOC_INCLUDE=/Users/suman/.cargo/registry/src/github.com-1ecc6299db9ec823/prost-build-0.8.0/third-party/protobuf/include

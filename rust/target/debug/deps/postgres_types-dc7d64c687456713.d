@@ -1,0 +1,11 @@
+/Users/suman/Projects/rust/practice/muscle_exercises/rust/target/debug/deps/postgres_types-dc7d64c687456713.rmeta: /Users/suman/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-types-0.2.1/src/lib.rs /Users/suman/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-types-0.2.1/src/pg_lsn.rs /Users/suman/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-types-0.2.1/src/private.rs /Users/suman/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-types-0.2.1/src/special.rs /Users/suman/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-types-0.2.1/src/type_gen.rs
+
+/Users/suman/Projects/rust/practice/muscle_exercises/rust/target/debug/deps/libpostgres_types-dc7d64c687456713.rlib: /Users/suman/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-types-0.2.1/src/lib.rs /Users/suman/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-types-0.2.1/src/pg_lsn.rs /Users/suman/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-types-0.2.1/src/private.rs /Users/suman/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-types-0.2.1/src/special.rs /Users/suman/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-types-0.2.1/src/type_gen.rs
+
+/Users/suman/Projects/rust/practice/muscle_exercises/rust/target/debug/deps/postgres_types-dc7d64c687456713.d: /Users/suman/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-types-0.2.1/src/lib.rs /Users/suman/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-types-0.2.1/src/pg_lsn.rs /Users/suman/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-types-0.2.1/src/private.rs /Users/suman/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-types-0.2.1/src/special.rs /Users/suman/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-types-0.2.1/src/type_gen.rs
+
+/Users/suman/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-types-0.2.1/src/lib.rs:
+/Users/suman/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-types-0.2.1/src/pg_lsn.rs:
+/Users/suman/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-types-0.2.1/src/private.rs:
+/Users/suman/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-types-0.2.1/src/special.rs:
+/Users/suman/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-types-0.2.1/src/type_gen.rs:

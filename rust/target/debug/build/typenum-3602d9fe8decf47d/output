@@ -1,0 +1,2 @@
+cargo:rustc-env=TYPENUM_BUILD_CONSTS=/Users/suman/Projects/rust/practice/muscle_exercises/rust/target/debug/build/typenum-3602d9fe8decf47d/out/consts.rs
+cargo:rustc-env=TYPENUM_BUILD_OP=/Users/suman/Projects/rust/practice/muscle_exercises/rust/target/debug/build/typenum-3602d9fe8decf47d/out/op.rs

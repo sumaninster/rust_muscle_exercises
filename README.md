@@ -48,3 +48,11 @@ Run the below commands in two different terminal
 2. Run $ cargo run --bin grpc-json-server
 3. Run $ cargo run --bin grpc-json-client
 4. Select an option from client terminal to receive data from grpc server
+
+## How to run grpc Android Client
+
+1. Import Android code to Android Studio
+2. Change ip address in config.rs/grpc_server_url function
+3. Run $ cargo run --bin grpc-server
+4. Install and run the app on your device.
+5. Provide ip address and port to connect to server
