@@ -19,9 +19,6 @@ package io.grpc.exercises;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
-
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.text.TextUtils;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
@@ -30,20 +27,25 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
-import io.grpc.StatusRuntimeException;
-import io.grpc.muscle.exercises.DataEmpty;
-import io.grpc.muscle.exercises.DataGrpc;
-import io.grpc.muscle.exercises.DataRequest;
-import io.grpc.muscle.exercises.Exercises;
-import io.grpc.muscle.exercises.MuscleGroups;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.lang.ref.WeakReference;
 import java.text.MessageFormat;
-import java.util.Iterator;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
+
+import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
+import io.grpc.muscle.exercises.DataEmpty;
+import io.grpc.muscle.exercises.DataGrpc;
+import io.grpc.muscle.exercises.DataRequest;
+import io.grpc.muscle.exercises.Exercise;
+import io.grpc.muscle.exercises.Exercises;
+import io.grpc.muscle.exercises.MuscleGroup;
+import io.grpc.muscle.exercises.MuscleGroups;
+import io.grpc.stub.StreamObserver;
 
 public class DataActivity extends AppCompatActivity {
     private EditText hostEdit;
@@ -62,16 +64,16 @@ public class DataActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data);
-        hostEdit = (EditText) findViewById(R.id.host_edit_text);
-        portEdit = (EditText) findViewById(R.id.port_edit_text);
-        startDataButton = (Button) findViewById(R.id.start_route_guide_button);
-        exitDataButton = (Button) findViewById(R.id.exit_route_guide_button);
-        getFeatureButton = (Button) findViewById(R.id.get_feature_button);
-        listFeaturesButton = (Button) findViewById(R.id.list_features_button);
-        recordRouteButton = (Button) findViewById(R.id.record_route_button);
-        routeChatButton = (Button) findViewById(R.id.route_chat_button);
-        requestDataId = (EditText) findViewById(R.id.request_data_id);
-        resultText = (TextView) findViewById(R.id.result_text);
+        hostEdit = findViewById(R.id.host_edit_text);
+        portEdit = findViewById(R.id.port_edit_text);
+        startDataButton = findViewById(R.id.start_route_guide_button);
+        exitDataButton = findViewById(R.id.exit_route_guide_button);
+        getFeatureButton = findViewById(R.id.get_feature_button);
+        listFeaturesButton = findViewById(R.id.list_features_button);
+        recordRouteButton = findViewById(R.id.record_route_button);
+        routeChatButton = findViewById(R.id.route_chat_button);
+        requestDataId = findViewById(R.id.request_data_id);
+        resultText = findViewById(R.id.result_text);
         resultText.setMovementMethod(new ScrollingMovementMethod());
         disableButtons();
     }
@@ -191,58 +193,113 @@ public class DataActivity extends AppCompatActivity {
     }
 
     private static class AllMuscleGroups implements GrpcRunnable {
+        private Throwable failed;
+
         @Override
-        public String run(DataGrpc.DataBlockingStub blockingStub, DataGrpc.DataStub asyncStub) {
-            return allMuscleGroups(blockingStub);
+        public String run(DataGrpc.DataBlockingStub blockingStub, DataGrpc.DataStub asyncStub)
+                throws Exception {
+            return allMuscleGroups(asyncStub);
         }
 
-        private String allMuscleGroups(
-                DataGrpc.DataBlockingStub blockingStub)
-                throws StatusRuntimeException {
-            StringBuffer logs = new StringBuffer("Result: ");
-            appendLogs(
-                    logs,
-                    "*** allMuscleGroups: ***");
+        private String allMuscleGroups(DataGrpc.DataStub asyncStub)
+                throws InterruptedException, RuntimeException {
+            final StringBuffer logs = new StringBuffer();
+            appendLogs(logs, "*** allMuscleGroups ***");
+
+            final CountDownLatch finishLatch = new CountDownLatch(1);
+            StreamObserver<MuscleGroups> responseObserver =
+                    new StreamObserver<MuscleGroups>() {
+                        @Override
+                        public void onNext(MuscleGroups muscleGroups) {
+                            for (MuscleGroup muscleGroup : muscleGroups.getMuscleGroupsList()) {
+                                appendLogs(logs, muscleGroup.toString());
+                            }
+                        }
+
+                        @Override
+                        public void onError(Throwable t) {
+                            failed = t;
+                            finishLatch.countDown();
+                        }
+
+                        @Override
+                        public void onCompleted() {
+                            appendLogs(logs, "Finished RecordRoute");
+                            finishLatch.countDown();
+                        }
+                    };
 
             DataEmpty request = DataEmpty.newBuilder().build();
-            Iterator<MuscleGroups> muscleGroups;
-            muscleGroups = blockingStub.allMuscleGroups(request);
+            asyncStub.allMuscleGroups(request, responseObserver);
 
-            while (muscleGroups.hasNext()) {
-                MuscleGroups muscleGroup = muscleGroups.next();
-                appendLogs(logs, muscleGroup.toString());
+            // Receiving happens asynchronously
+            if (!finishLatch.await(1, TimeUnit.MINUTES)) {
+                throw new RuntimeException(
+                        "Could not finish rpc within 1 minute, the server is likely down");
+            }
+
+            if (failed != null) {
+                throw new RuntimeException(failed);
             }
             return logs.toString();
         }
     }
 
     private static class AllExercises implements GrpcRunnable {
+        private Throwable failed;
+
         @Override
-        public String run(DataGrpc.DataBlockingStub blockingStub, DataGrpc.DataStub asyncStub) {
-            return allExercises(blockingStub);
+        public String run(DataGrpc.DataBlockingStub blockingStub, DataGrpc.DataStub asyncStub)
+                throws Exception {
+            return allExercises(asyncStub);
         }
 
-        private String allExercises(
-                DataGrpc.DataBlockingStub blockingStub)
-                throws StatusRuntimeException {
-            StringBuffer logs = new StringBuffer("Result: ");
-            appendLogs(
-                    logs,
-                    "*** allMuscleGroups: ***");
+        private String allExercises(DataGrpc.DataStub asyncStub)
+                throws InterruptedException, RuntimeException {
+            final StringBuffer logs = new StringBuffer();
+            appendLogs(logs, "*** allMuscleGroups ***");
+
+            final CountDownLatch finishLatch = new CountDownLatch(1);
+            StreamObserver<Exercises> responseObserver =
+                    new StreamObserver<Exercises>() {
+                        @Override
+                        public void onNext(Exercises exercises) {
+                            for (Exercise exercise : exercises.getExercisesList()) {
+                                appendLogs(logs, exercise.toString());
+                            }
+                        }
+
+                        @Override
+                        public void onError(Throwable t) {
+                            failed = t;
+                            finishLatch.countDown();
+                        }
+
+                        @Override
+                        public void onCompleted() {
+                            appendLogs(logs, "Finished RecordRoute");
+                            finishLatch.countDown();
+                        }
+                    };
 
             DataEmpty request = DataEmpty.newBuilder().build();
-            Iterator<Exercises> exercises;
-            exercises = blockingStub.allExercises(request);
+            asyncStub.allExercises(request, responseObserver);
 
-            while (exercises.hasNext()) {
-                Exercises exercise = exercises.next();
-                appendLogs(logs, exercise.toString());
+            // Receiving happens asynchronously
+            if (!finishLatch.await(1, TimeUnit.MINUTES)) {
+                throw new RuntimeException(
+                        "Could not finish rpc within 1 minute, the server is likely down");
+            }
+
+            if (failed != null) {
+                throw new RuntimeException(failed);
             }
             return logs.toString();
         }
     }
 
     private static class ExercisesForMuscleGroup implements GrpcRunnable {
+        private Throwable failed;
         private final long id;
 
         ExercisesForMuscleGroup(long _id) {
@@ -250,34 +307,57 @@ public class DataActivity extends AppCompatActivity {
         }
 
         @Override
-        public String run(DataGrpc.DataBlockingStub blockingStub, DataGrpc.DataStub asyncStub) {
-            return exercisesForMuscleGroup(id, blockingStub);
+        public String run(DataGrpc.DataBlockingStub blockingStub, DataGrpc.DataStub asyncStub)
+                throws Exception {
+            return exercisesForMuscleGroup(id, asyncStub);
         }
 
-        private String exercisesForMuscleGroup(
-                long id, DataGrpc.DataBlockingStub blockingStub)
-                throws StatusRuntimeException {
-            StringBuffer logs = new StringBuffer("Result: ");
-            appendLogs(
-                    logs,
-                    "*** exercisesForMuscleGroup: Muscle Group Id={0}", id);
+        private String exercisesForMuscleGroup(long id, DataGrpc.DataStub asyncStub)
+                throws InterruptedException, RuntimeException {
+            final StringBuffer logs = new StringBuffer();
+            appendLogs(logs, "*** allMuscleGroups ***");
 
-            DataRequest request =
-                    DataRequest.newBuilder()
-                            .setId(id)
-                            .build();
-            Iterator<Exercises> exercises;
-            exercises = blockingStub.exercisesForMuscleGroup(request);
+            final CountDownLatch finishLatch = new CountDownLatch(1);
+            StreamObserver<Exercises> responseObserver =
+                    new StreamObserver<Exercises>() {
+                        @Override
+                        public void onNext(Exercises exercises) {
+                            for (Exercise exercise : exercises.getExercisesList()) {
+                                appendLogs(logs, exercise.toString());
+                            }
+                        }
 
-            while (exercises.hasNext()) {
-                Exercises exercise = exercises.next();
-                appendLogs(logs, exercise.toString());
+                        @Override
+                        public void onError(Throwable t) {
+                            failed = t;
+                            finishLatch.countDown();
+                        }
+
+                        @Override
+                        public void onCompleted() {
+                            appendLogs(logs, "Finished RecordRoute");
+                            finishLatch.countDown();
+                        }
+                    };
+
+            DataRequest request = DataRequest.newBuilder().setId(id).build();
+            asyncStub.exercisesForMuscleGroup(request, responseObserver);
+
+            // Receiving happens asynchronously
+            if (!finishLatch.await(1, TimeUnit.MINUTES)) {
+                throw new RuntimeException(
+                        "Could not finish rpc within 1 minute, the server is likely down");
+            }
+
+            if (failed != null) {
+                throw new RuntimeException(failed);
             }
             return logs.toString();
         }
     }
 
     private static class MuscleGroupsForExercise implements GrpcRunnable {
+        private Throwable failed;
         private final long id;
 
         MuscleGroupsForExercise(long _id) {
@@ -285,25 +365,50 @@ public class DataActivity extends AppCompatActivity {
         }
 
         @Override
-        public String run(DataGrpc.DataBlockingStub blockingStub, DataGrpc.DataStub asyncStub) {
-            return muscleGroupsForExercise(id, blockingStub);
+        public String run(DataGrpc.DataBlockingStub blockingStub, DataGrpc.DataStub asyncStub)
+                throws Exception {
+            return muscleGroupsForExercise(id, asyncStub);
         }
 
-        private String muscleGroupsForExercise(
-                long id, DataGrpc.DataBlockingStub blockingStub)
-                throws StatusRuntimeException {
-            StringBuffer logs = new StringBuffer("Result: ");
-            appendLogs(
-                    logs,
-                    "*** muscleGroupsForExercise: Exercise Id={0} ***", id);
+        private String muscleGroupsForExercise(long id, DataGrpc.DataStub asyncStub)
+                throws InterruptedException, RuntimeException {
+            final StringBuffer logs = new StringBuffer();
+            appendLogs(logs, "*** allMuscleGroups ***");
+
+            final CountDownLatch finishLatch = new CountDownLatch(1);
+            StreamObserver<MuscleGroups> responseObserver =
+                    new StreamObserver<MuscleGroups>() {
+                        @Override
+                        public void onNext(MuscleGroups muscleGroups) {
+                            for (MuscleGroup muscleGroup : muscleGroups.getMuscleGroupsList()) {
+                                appendLogs(logs, muscleGroup.toString());
+                            }
+                        }
+
+                        @Override
+                        public void onError(Throwable t) {
+                            failed = t;
+                            finishLatch.countDown();
+                        }
+
+                        @Override
+                        public void onCompleted() {
+                            appendLogs(logs, "Finished RecordRoute");
+                            finishLatch.countDown();
+                        }
+                    };
 
             DataRequest request = DataRequest.newBuilder().setId(id).build();
-            Iterator<MuscleGroups> muscleGroups;
-            muscleGroups = blockingStub.muscleGroupsForExercise(request);
+            asyncStub.muscleGroupsForExercise(request, responseObserver);
 
-            while (muscleGroups.hasNext()) {
-                MuscleGroups muscleGroup = muscleGroups.next();
-                appendLogs(logs, muscleGroup.toString());
+            // Receiving happens asynchronously
+            if (!finishLatch.await(1, TimeUnit.MINUTES)) {
+                throw new RuntimeException(
+                        "Could not finish rpc within 1 minute, the server is likely down");
+            }
+
+            if (failed != null) {
+                throw new RuntimeException(failed);
             }
             return logs.toString();
         }
