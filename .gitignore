@@ -3,10 +3,10 @@
 /rust/Cargo.lock
 
 # Android
+/android/.gradle
 /android/.idea
+/android/gradle
 /android/local.properties
-/android/build
-/android/captures
 *.DS_Store
 *.externalNativeBuild
 *.iml
