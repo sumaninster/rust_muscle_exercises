@@ -1,0 +1,173 @@
+{"message":"internal compiler error: encountered incremental compilation error with generics_of(api[c21a]::api::get_data_async)","code":null,"level":"error","spans":[],"children":[{"message":"This is a known issue with the compiler. Run `cargo clean -p grpc_json_server` or `cargo clean` to allow your project to compile","code":null,"level":"help","spans":[],"children":[],"rendered":null},{"message":"Please follow the instructions below to create a bug report with the provided information","code":null,"level":"note","spans":[],"children":[],"rendered":null},{"message":"See <https://github.com/rust-lang/rust/issues/84970> for more information","code":null,"level":"note","spans":[],"children":[],"rendered":null}],"rendered":"\u001b[0m\u001b[1m\u001b[38;5;9merror\u001b[0m\u001b[0m\u001b[1m: internal compiler error: encountered incremental compilation error with generics_of(api[c21a]::api::get_data_async)\u001b[0m\n\u001b[0m  \u001b[0m\u001b[0m\u001b[1m\u001b[38;5;12m|\u001b[0m\n\u001b[0m  \u001b[0m\u001b[0m\u001b[1m\u001b[38;5;12m= \u001b[0m\u001b[0m\u001b[1mhelp\u001b[0m\u001b[0m: This is a known issue with the compiler. Run `cargo clean -p grpc_json_server` or `cargo clean` to allow your project to compile\u001b[0m\n\u001b[0m  \u001b[0m\u001b[0m\u001b[1m\u001b[38;5;12m= \u001b[0m\u001b[0m\u001b[1mnote\u001b[0m\u001b[0m: Please follow the instructions below to create a bug report with the provided information\u001b[0m\n\u001b[0m  \u001b[0m\u001b[0m\u001b[1m\u001b[38;5;12m= \u001b[0m\u001b[0m\u001b[1mnote\u001b[0m\u001b[0m: See <https://github.com/rust-lang/rust/issues/84970> for more information\u001b[0m\n\n"}
+thread 'rustc' panicked at 'Found unstable fingerprints for generics_of(api[c21a]::api::get_data_async): Generics { parent: None, parent_count: 0, params: [], param_def_id_to_index: {}, has_self: false, has_late_bound_regions: Some(/Users/suman/Projects/rust/practice/api_and_grpc/rust/src/lib/api.rs:68:39: 68:40 (#0)) }', /rustc/ccffcafd55e58f769d4b0efc0064bf65e76998e4/compiler/rustc_query_system/src/query/plumbing.rs:626:9
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+error: internal compiler error: unexpected panic
+
+note: the compiler unexpectedly panicked. this is a bug.
+
+note: we would appreciate a bug report: https://github.com/rust-lang/rust/issues/new?labels=C-bug%2C+I-ICE%2C+T-compiler&template=ice.md
+
+note: rustc 1.56.0-nightly (ccffcafd5 2021-08-11) running on x86_64-apple-darwin
+
+note: compiler flags: -C embed-bitcode=no -C split-debuginfo=unpacked -C debuginfo=2 -C incremental --crate-type bin
+
+note: some of the compiler flags provided by cargo are hidden
+
+query stack during panic:
+{"message":"internal compiler error: encountered incremental compilation error with item_children(api[c21a])","code":null,"level":"error","spans":[],"children":[{"message":"This is a known issue with the compiler. Run `cargo clean -p grpc_json_server` or `cargo clean` to allow your project to compile","code":null,"level":"help","spans":[],"children":[],"rendered":null},{"message":"Please follow the instructions below to create a bug report with the provided information","code":null,"level":"note","spans":[],"children":[],"rendered":null},{"message":"See <https://github.com/rust-lang/rust/issues/84970> for more information","code":null,"level":"note","spans":[],"children":[],"rendered":null}],"rendered":"\u001b[0m\u001b[1m\u001b[38;5;9merror\u001b[0m\u001b[0m\u001b[1m: internal compiler error: encountered incremental compilation error with item_children(api[c21a])\u001b[0m\n\u001b[0m  \u001b[0m\u001b[0m\u001b[1m\u001b[38;5;12m|\u001b[0m\n\u001b[0m  \u001b[0m\u001b[0m\u001b[1m\u001b[38;5;12m= \u001b[0m\u001b[0m\u001b[1mhelp\u001b[0m\u001b[0m: This is a known issue with the compiler. Run `cargo clean -p grpc_json_server` or `cargo clean` to allow your project to compile\u001b[0m\n\u001b[0m  \u001b[0m\u001b[0m\u001b[1m\u001b[38;5;12m= \u001b[0m\u001b[0m\u001b[1mnote\u001b[0m\u001b[0m: Please follow the instructions below to create a bug report with the provided information\u001b[0m\n\u001b[0m  \u001b[0m\u001b[0m\u001b[1m\u001b[38;5;12m= \u001b[0m\u001b[0m\u001b[1mnote\u001b[0m\u001b[0m: See <https://github.com/rust-lang/rust/issues/84970> for more information\u001b[0m\n\n"}
+thread 'rustc' panicked at 'Found unstable fingerprints for item_children(api[c21a]): [Export { ident: psql#0, res: Def(Mod, DefId(75:3 ~ api[c21a]::psql)), span: /Users/suman/Projects/rust/practice/api_and_grpc/rust/src/lib/api.rs:1:1: 1:10 (#0), vis: Restricted(DefId(75:0 ~ api[c21a])) }, Export { ident: config#0, res: Def(Mod, DefId(75:31 ~ api[c21a]::config)), span: /Users/suman/Projects/rust/practice/api_and_grpc/rust/src/lib/api.rs:2:1: 2:12 (#0), vis: Restricted(DefId(75:0 ~ api[c21a])) }, Export { ident: psql_async#0, res: Def(Mod, DefId(75:39 ~ api[c21a]::psql_async)), span: /Users/suman/Projects/rust/practice/api_and_grpc/rust/src/lib/api.rs:3:1: 3:16 (#0), vis: Restricted(DefId(75:0 ~ api[c21a])) }, Export { ident: api#0, res: Def(Mod, DefId(75:79 ~ api[c21a]::api)), span: /Users/suman/Projects/rust/practice/api_and_grpc/rust/src/lib/api.rs:5:1: 87:2 (#0), vis: Public }]', /rustc/ccffcafd55e58f769d4b0efc0064bf65e76998e4/compiler/rustc_query_system/src/query/plumbing.rs:626:9
+stack backtrace:
+   0:        0x10b6891b4 - <std::sys_common::backtrace::_print::DisplayBacktrace as core::fmt::Display>::fmt::hf479dd487b623c5f
+   1:        0x10b6edb2c - core::fmt::write::h8160330c41daaf61
+   2:        0x10b67b0ba - std::io::Write::write_fmt::h2c9315db2d27960e
+   3:        0x10b68c58f - std::panicking::default_hook::{{closure}}::h583fb652f5c58b48
+   4:        0x10b68c136 - std::panicking::default_hook::h1d01fcd3894dae52
+   5:        0x103cf0ad0 - rustc_driver::DEFAULT_HOOK::{{closure}}::{{closure}}::hacd6967fcb7c0640
+   6:        0x10b68cde6 - std::panicking::rust_panic_with_hook::h013ca0228b580e94
+   7:        0x10b68c85e - std::panicking::begin_panic_handler::{{closure}}::h851d3f5f9017436b
+   8:        0x10b689647 - std::sys_common::backtrace::__rust_end_short_backtrace::h83695ce1e08cc610
+   9:        0x10b68c7ca - _rust_begin_unwind
+  10:        0x10b717a9b - std::panicking::begin_panic_fmt::hc639b8142a2a7ab1
+  11:        0x106f51565 - rustc_query_system::query::plumbing::incremental_verify_ich::h40788b2285a62596
+  12:        0x106f98bd0 - rustc_query_system::query::plumbing::load_from_disk_and_cache_in_memory::h5f5db62dcc4c1936
+  13:        0x1072525a7 - rustc_data_structures::stack::ensure_sufficient_stack::h57fe8a2e0763eee6
+  14:        0x106ebeefd - rustc_query_system::query::plumbing::get_query_impl::hd24c1dad0cb57019
+  15:        0x1071d697c - <rustc_query_impl::Queries as rustc_middle::ty::query::QueryEngine>::item_children::h0007f6d0ab7255be
+  16:        0x1075cffe8 - core::ops::function::FnOnce::call_once::haa6f82e363587e44
+  17:        0x10717585f - rustc_middle::dep_graph::<impl rustc_query_system::dep_graph::DepKind for rustc_middle::dep_graph::dep_node::DepKind>::with_deps::h049d2a4da4eb67ac
+  18:        0x106fa4b5a - rustc_query_system::query::plumbing::load_from_disk_and_cache_in_memory::hd4ba7bb7c8639872
+  19:        0x10725270e - rustc_data_structures::stack::ensure_sufficient_stack::h581c1f392a19255d
+  20:        0x106e6ef1b - rustc_query_system::query::plumbing::get_query_impl::h5e030afb3f605e39
+  21:        0x1071d707d - <rustc_query_impl::Queries as rustc_middle::ty::query::QueryEngine>::visible_parent_map::h30947f7234d947b2
+  22:        0x107d171ef - rustc_middle::ty::print::pretty::PrettyPrinter::try_print_visible_def_path_recur::h65ba9f6d1ccce619
+  23:        0x107d29162 - <rustc_middle::ty::print::pretty::FmtPrinter<F> as rustc_middle::ty::print::Printer>::print_def_path::h9329f6f24d2d280d
+  24:        0x107c746ef - rustc_middle::ty::print::pretty::<impl rustc_middle::ty::context::TyCtxt>::def_path_str_with_substs::hf5a36b696942a3f1
+  25:        0x107c74578 - rustc_middle::ty::print::pretty::<impl rustc_middle::ty::context::TyCtxt>::def_path_str::h03c34694a5ba9d4c
+  26:        0x107004eaf - std::thread::local::LocalKey<T>::with::hf4eaad1e33e6eb3b
+  27:        0x10704c441 - rustc_query_impl::make_query::generics_of::hab8945527c3132e5
+  28:        0x106f8b41f - rustc_query_system::query::plumbing::QueryState<D,K>::try_collect_active_jobs::hfa755d06675e727d
+  29:        0x1071c92fb - rustc_query_impl::Queries::try_collect_active_jobs::hc78ccfe2be4938b6
+  30:        0x106fd81a2 - rustc_query_system::query::job::print_query_stack::h01dbdaa183fc5ec0
+  31:        0x103ea6d12 - rustc_interface::interface::try_print_query_stack::hf288b86190bacccc
+  32:        0x103cf158d - rustc_driver::report_ice::hbbe9a614e6daf122
+  33:        0x10b68cde6 - std::panicking::rust_panic_with_hook::h013ca0228b580e94
+  34:        0x10b68c85e - std::panicking::begin_panic_handler::{{closure}}::h851d3f5f9017436b
+  35:        0x10b689647 - std::sys_common::backtrace::__rust_end_short_backtrace::h83695ce1e08cc610
+  36:        0x10b68c7ca - _rust_begin_unwind
+  37:        0x10b717a9b - std::panicking::begin_panic_fmt::hc639b8142a2a7ab1
+  38:        0x106f6a795 - rustc_query_system::query::plumbing::incremental_verify_ich::ha35e3ca9c7526520
+  39:        0x106f9c40d - rustc_query_system::query::plumbing::load_from_disk_and_cache_in_memory::h86391a3930b4bcf4
+  40:        0x1072568ea - rustc_data_structures::stack::ensure_sufficient_stack::h6f2b238f099fd63b
+  41:        0x106e3cf9a - rustc_query_system::query::plumbing::get_query_impl::h0db905b26601871e
+  42:        0x1071cc639 - <rustc_query_impl::Queries as rustc_middle::ty::query::QueryEngine>::generics_of::ha7a764f98301a5b5
+  43:        0x1064476bd - rustc_typeck::check::fn_ctxt::_impl::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::instantiate_value_path::h6de174002f5cdedd
+  44:        0x106436a06 - rustc_typeck::check::expr::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::check_expr_kind::ha9fb8028ce8049e8
+  45:        0x10643370c - rustc_typeck::check::expr::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::check_expr_with_expectation::ha4100a7918d12fff
+  46:        0x10641d47e - rustc_typeck::check::callee::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::check_call::hc02abe1ac0aa3082
+  47:        0x106434277 - rustc_typeck::check::expr::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::check_expr_kind::ha9fb8028ce8049e8
+  48:        0x10643370c - rustc_typeck::check::expr::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::check_expr_with_expectation::ha4100a7918d12fff
+  49:        0x10641c702 - rustc_typeck::check::_match::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::demand_scrutinee_type::h7bb757c3ba230330
+  50:        0x10641a06b - rustc_typeck::check::_match::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::check_match::h7adc4ba88539d8a9
+  51:        0x106433c86 - rustc_typeck::check::expr::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::check_expr_kind::ha9fb8028ce8049e8
+  52:        0x10643370c - rustc_typeck::check::expr::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::check_expr_with_expectation::ha4100a7918d12fff
+  53:        0x106433588 - rustc_typeck::check::expr::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::check_expr_coercable_to_type::h642ce82fee948bb6
+  54:        0x106438c86 - rustc_typeck::check::expr::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::check_expr_kind::ha9fb8028ce8049e8
+  55:        0x10643370c - rustc_typeck::check::expr::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::check_expr_with_expectation::ha4100a7918d12fff
+  56:        0x106433588 - rustc_typeck::check::expr::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::check_expr_coercable_to_type::h642ce82fee948bb6
+  57:        0x10644dd96 - rustc_typeck::check::fn_ctxt::checks::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::check_decl_local::h0c6962f22ffbc9e9
+  58:        0x10644df31 - rustc_typeck::check::fn_ctxt::checks::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::check_stmt::h56696032ddccc110
+  59:        0x10644e9c2 - rustc_typeck::check::fn_ctxt::checks::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::check_block_with_expected::h820f8c1cbfa1e981
+  60:        0x10643370c - rustc_typeck::check::expr::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::check_expr_with_expectation::ha4100a7918d12fff
+  61:        0x10643d196 - rustc_typeck::check::expr::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::check_return_expr::h022d37f4af6c404e
+  62:        0x1065f0b6b - rustc_typeck::check::check::check_fn::h2a6bcd41f316a63e
+  63:        0x10642274b - rustc_typeck::check::closure::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::check_expr_closure::h1cfda4d1b5879f0e
+  64:        0x106434254 - rustc_typeck::check::expr::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::check_expr_kind::ha9fb8028ce8049e8
+  65:        0x10643370c - rustc_typeck::check::expr::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::check_expr_with_expectation::ha4100a7918d12fff
+  66:        0x10644af60 - rustc_typeck::check::fn_ctxt::checks::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::check_argument_types::h88a0672460b70f07
+  67:        0x106420730 - rustc_typeck::check::callee::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::confirm_builtin_call::h1afde17106f69e60
+  68:        0x10641e5ad - rustc_typeck::check::callee::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::check_call::hc02abe1ac0aa3082
+  69:        0x106434277 - rustc_typeck::check::expr::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::check_expr_kind::ha9fb8028ce8049e8
+  70:        0x10643370c - rustc_typeck::check::expr::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::check_expr_with_expectation::ha4100a7918d12fff
+  71:        0x10644af60 - rustc_typeck::check::fn_ctxt::checks::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::check_argument_types::h88a0672460b70f07
+  72:        0x106420730 - rustc_typeck::check::callee::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::confirm_builtin_call::h1afde17106f69e60
+  73:        0x10641e5ad - rustc_typeck::check::callee::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::check_call::hc02abe1ac0aa3082
+  74:        0x106434277 - rustc_typeck::check::expr::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::check_expr_kind::ha9fb8028ce8049e8
+  75:        0x10643370c - rustc_typeck::check::expr::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::check_expr_with_expectation::ha4100a7918d12fff
+  76:        0x10644df97 - rustc_typeck::check::fn_ctxt::checks::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::check_stmt::h56696032ddccc110
+  77:        0x10644e9c2 - rustc_typeck::check::fn_ctxt::checks::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::check_block_with_expected::h820f8c1cbfa1e981
+  78:        0x10643370c - rustc_typeck::check::expr::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::check_expr_with_expectation::ha4100a7918d12fff
+  79:        0x106433588 - rustc_typeck::check::expr::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::check_expr_coercable_to_type::h642ce82fee948bb6
+  80:        0x10644dd96 - rustc_typeck::check::fn_ctxt::checks::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::check_decl_local::h0c6962f22ffbc9e9
+  81:        0x10644df31 - rustc_typeck::check::fn_ctxt::checks::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::check_stmt::h56696032ddccc110
+  82:        0x10644e9c2 - rustc_typeck::check::fn_ctxt::checks::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::check_block_with_expected::h820f8c1cbfa1e981
+  83:        0x10643370c - rustc_typeck::check::expr::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::check_expr_with_expectation::ha4100a7918d12fff
+  84:        0x10643d196 - rustc_typeck::check::expr::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::check_return_expr::h022d37f4af6c404e
+  85:        0x1065f0b6b - rustc_typeck::check::check::check_fn::h2a6bcd41f316a63e
+  86:        0x10642274b - rustc_typeck::check::closure::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::check_expr_closure::h1cfda4d1b5879f0e
+  87:        0x106434254 - rustc_typeck::check::expr::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::check_expr_kind::ha9fb8028ce8049e8
+  88:        0x10643370c - rustc_typeck::check::expr::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::check_expr_with_expectation::ha4100a7918d12fff
+  89:        0x10644af60 - rustc_typeck::check::fn_ctxt::checks::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::check_argument_types::h88a0672460b70f07
+  90:        0x106420730 - rustc_typeck::check::callee::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::confirm_builtin_call::h1afde17106f69e60
+  91:        0x10641e5ad - rustc_typeck::check::callee::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::check_call::hc02abe1ac0aa3082
+  92:        0x106434277 - rustc_typeck::check::expr::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::check_expr_kind::ha9fb8028ce8049e8
+  93:        0x10643370c - rustc_typeck::check::expr::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::check_expr_with_expectation::ha4100a7918d12fff
+  94:        0x10644af60 - rustc_typeck::check::fn_ctxt::checks::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::check_argument_types::h88a0672460b70f07
+  95:        0x106420730 - rustc_typeck::check::callee::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::confirm_builtin_call::h1afde17106f69e60
+  96:        0x10641e5ad - rustc_typeck::check::callee::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::check_call::hc02abe1ac0aa3082
+  97:        0x106434277 - rustc_typeck::check::expr::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::check_expr_kind::ha9fb8028ce8049e8
+  98:        0x10643370c - rustc_typeck::check::expr::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::check_expr_with_expectation::ha4100a7918d12fff
+  99:        0x10644ea06 - rustc_typeck::check::fn_ctxt::checks::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::check_block_with_expected::h820f8c1cbfa1e981
+ 100:        0x10643370c - rustc_typeck::check::expr::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::check_expr_with_expectation::ha4100a7918d12fff
+ 101:        0x10643d196 - rustc_typeck::check::expr::<impl rustc_typeck::check::fn_ctxt::FnCtxt>::check_return_expr::h022d37f4af6c404e
+ 102:        0x1065f0b6b - rustc_typeck::check::check::check_fn::h2a6bcd41f316a63e
+ 103:        0x106531b40 - rustc_infer::infer::InferCtxtBuilder::enter::he527e427a143265a
+ 104:        0x1064bc2d1 - rustc_typeck::check::typeck::h9d35c2e24972a091
+ 105:        0x10710b89b - rustc_query_system::dep_graph::graph::DepGraph<K>::with_task_impl::h208eef00c1f5b94a
+ 106:        0x10726a040 - rustc_data_structures::stack::ensure_sufficient_stack::hd80682e826e729c6
+ 107:        0x106f147d4 - rustc_query_system::query::plumbing::force_query_with_job::h86ad3a061fd426c0
+ 108:        0x106efec7e - rustc_query_system::query::plumbing::force_query_impl::hf1a3e8437b44f5ff
+ 109:        0x1071ac11c - rustc_query_impl::query_callbacks::typeck::force_from_dep_node::h2f03954a31e87221
+ 110:        0x1071512e9 - rustc_query_system::dep_graph::graph::DepGraph<K>::try_mark_previous_green::h1ef568acfb26f203
+ 111:        0x1070c32b7 - rustc_query_system::dep_graph::graph::DepGraph<K>::try_mark_green::h912b8fdc0b9808a5
+ 112:        0x106ed7d1d - rustc_query_system::query::plumbing::ensure_must_run::h779e21576ce5e937
+ 113:        0x1071d0ab2 - <rustc_query_impl::Queries as rustc_middle::ty::query::QueryEngine>::typeck::hafd36d7b3c12ab6e
+ 114:        0x1064f4900 - rustc_middle::ty::<impl rustc_middle::ty::context::TyCtxt>::par_body_owners::h5bc181cd4f5d1751
+ 115:        0x1064c1255 - rustc_typeck::check::typeck_item_bodies::h22b6cf2a9f73aa59
+ 116:        0x10710e091 - rustc_query_system::dep_graph::graph::DepGraph<K>::with_task_impl::h243652d1df9b652b
+ 117:        0x10725204f - rustc_data_structures::stack::ensure_sufficient_stack::h5538b47e805d1249
+ 118:        0x106f048ca - rustc_query_system::query::plumbing::force_query_with_job::h16148db39c4731bb
+ 119:        0x106e3c165 - rustc_query_system::query::plumbing::get_query_impl::h0cc066007b98367f
+ 120:        0x1071d0a1d - <rustc_query_impl::Queries as rustc_middle::ty::query::QueryEngine>::typeck_item_bodies::h58f88c4788811aa8
+ 121:        0x1064f62c2 - rustc_session::utils::<impl rustc_session::session::Session>::time::h76ce344c281cbf42
+ 122:        0x1064c9aaa - rustc_typeck::check_crate::hb910063fbc284de0
+ 123:        0x103e1a7ca - rustc_interface::passes::analysis::h04ab5fecd070d0a7
+ 124:        0x107111527 - rustc_query_system::dep_graph::graph::DepGraph<K>::with_task_impl::h32863ba9b893eca1
+ 125:        0x107260226 - rustc_data_structures::stack::ensure_sufficient_stack::ha4929c3254afdbc7
+ 126:        0x106f22990 - rustc_query_system::query::plumbing::force_query_with_job::heb1342a7b777ed5f
+ 127:        0x106e52652 - rustc_query_system::query::plumbing::get_query_impl::h2e41c6fc32dd20d1
+ 128:        0x1071cc56a - <rustc_query_impl::Queries as rustc_middle::ty::query::QueryEngine>::analysis::h932fed03ec7b2015
+ 129:        0x103d3032b - rustc_interface::queries::<impl rustc_interface::interface::Compiler>::enter::h3c1f508bc7afd51b
+ 130:        0x103cf742e - rustc_span::with_source_map::h64568346a39038cc
+ 131:        0x103d311f2 - rustc_interface::interface::create_compiler_and_run::h2abe63575eb37cd7
+ 132:        0x103d0786f - scoped_tls::ScopedKey<T>::set::hdc4f0019aa4c154a
+ 133:        0x103d02039 - std::sys_common::backtrace::__rust_begin_short_backtrace::hb06e008d4ed81281
+ 134:        0x103cf447d - core::ops::function::FnOnce::call_once{{vtable.shim}}::h8db869c0ae9589a7
+ 135:        0x10b698687 - std::sys::unix::thread::Thread::new::thread_start::h469f8017f1f0a4a2
+ 136:     0x7fff2057e8fc - __pthread_start
+
+error: internal compiler error: unexpected panic
+
+note: the compiler unexpectedly panicked. this is a bug.
+
+note: we would appreciate a bug report: https://github.com/rust-lang/rust/issues/new?labels=C-bug%2C+I-ICE%2C+T-compiler&template=ice.md
+
+note: rustc 1.56.0-nightly (ccffcafd5 2021-08-11) running on x86_64-apple-darwin
+
+note: compiler flags: -C embed-bitcode=no -C split-debuginfo=unpacked -C debuginfo=2 -C incremental --crate-type bin
+
+note: some of the compiler flags provided by cargo are hidden
+
+query stack during panic:
+end of query stack
+thread panicked while panicking. aborting.

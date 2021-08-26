@@ -4,7 +4,7 @@ This API is built to demonstrate Rust REST API
 ## Project Setup
 
 1. Create a project directory and navigate to the folder from your terminal.
-2. git clone https://github.com/sumaninster/rust_muscle_exercises.git
+2. git clone https://github.com/sumaninster/rust_rest_api_and_grpc_get_started
 3. Update your database username, password and database name in the config.rs file.
 
 ## How to import the db.sql file in your postgres database

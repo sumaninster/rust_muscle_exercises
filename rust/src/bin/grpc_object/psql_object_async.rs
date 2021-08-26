@@ -23,8 +23,8 @@ pub mod psql_object_async {
         let client = db_connection().await.unwrap();
         let mut result = Vec::new();
         for row in client.query(query, params).await? {
-            let id: i64 = row.get(0);
-            let name: String = row.get(1);
+            let id: i64 = row.try_get("id").unwrap();
+            let name: String = row.try_get("name").unwrap();
             println!("Groups, Id: {}, Name: {}", id, name);
             result.push(MuscleGroup { id, name,});
         }
@@ -35,8 +35,8 @@ pub mod psql_object_async {
         let client = db_connection().await.unwrap();
         let mut result = Vec::new();
         for row in client.query(query, params).await? {
-            let id: i64 = row.get(0);
-            let name: String = row.get(1);
+            let id: i64 = row.try_get("id").unwrap();
+            let name: String = row.try_get("name").unwrap();
             println!("Groups, Id: {}, Name: {}", id, name);
             result.push(Exercise { id, name,});
         }
