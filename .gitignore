@@ -1,2 +1,12 @@
-/target
-Cargo.lock
+#Rust
+/rust/target
+/rust/Cargo.lock
+
+# Android
+/android/.idea
+/android/local.properties
+/android/build
+/android/captures
+*.DS_Store
+*.externalNativeBuild
+*.iml
